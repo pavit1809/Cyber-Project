@@ -2,8 +2,6 @@
   margin:0; padding:0; box-sizing:border-box;
 }
 body{
-	/*margin: 0;
-  padding: 0;*/
   font-family: "Dosis", Helvetica, Arial, sans-serif;
   background: url(../2.jpg) no-repeat center center fixed; 
   -webkit-background-size: cover;
@@ -12,68 +10,111 @@ body{
   background-size: cover;
 }
 #main{
-  /*margin: 100px 0;*/
-  /*background: #f8f9fa;*/
   padding-bottom:50px;
   padding-top:50px;
 }
 .first{
   background: rgba(0, 102, 102, 0.3); 
   color:white;
-  /*margin-left:50%;*/
 }
 
+.main h3,h6{
+  background: rgba(195, 216, 217, 0.5);
+}
+.main1 h3,h6{
+  background: rgba(195, 216, 217, 0.5);
+}
 .main{
-  /*border-left:4px solid #7b1798;*/
   margin-top:10%;
   margin-bottom:10%;
-  margin-left: 5%;
-  margin-right: 50%;
+  margin-left: 13%;
+
+}
+.main1{
+  margin-top:10%;
+  margin-bottom:10%;
+  margin-left: 13%;
 
 }
 .container a{
   text-decoration: none;
 }
-.main{
+.main1{
     white space:nowrap;
-background-color:#11939c/*#16b9c4*//*#2b595c*/;
-  opacity:0.98;
-  padding: 10px 13px;
-  color: black;
+background-color:#2b595c;
+  opacity:0.8;
+  color: black !important;
   font-size: 1em;
-  margin-left: 10%;
-  margin-right:55%;
   border-style :inset;
   border-color: white;
   border-radius: 10px 5px;
   position:relative;
-  z-index:4;
   transition: all 800ms ease;
+   -webkit-animation:bounce 2s infinite;
+}
+.main1:hover{
+  white space:nowrap;
+  background:url(../pwd.jpg) no-repeat center center fixed;
+  opacity:0.98;
+  color: black;
+  font-weight: bold;
+  border-color:#2b595c;
+  border-radius: 30px 20px;
+  position:relative;
+  transition: all 1600ms ease;
+}
+.main{
+    white space:nowrap;
+background-color:#2b595c;
+  opacity:0.8;
+  color: black !important;
+  font-size: 1em;
+  border-style :inset;
+  border-color: white;
+  border-radius: 10px 5px;
+  position:relative;
+  transition: all 800ms ease;
+  -webkit-animation:bounce 2s infinite;
 }
 .main:hover{
   white space:nowrap;
-  background-color:#3dd1db;
-  opacity:0.5;
-  padding: 20px 26px;
+  background:url(../cipher.jpg) no-repeat right bottom fixed;
+  opacity:0.98  ;
   color: black;
-  margin-left: 5%;
   font-weight: bold;
   border-color:#2b595c;
-  margin-right:50%;
   border-radius: 30px 20px;
   position:relative;
-  z-index:10;
   transition: all 1600ms ease;
+  
 }
-/*.main h3{
-  text-shadow: 2px 4px 20px #924DF9;
-}*/
-/*.main main-img img{
-  height: 50px;
-  width: 50px;
-  border-radius: 50%;
-  margin:0 10px;
-}
-/*.Pwd-mng{
+@-webkit-keyframes bounce {
+      0%       { bottom:0px; }
+      49%,50%,51%      { bottom:17.5px; }
 
-}*/
+      100%     {bottom:0;}
+}
+
+.wrap {
+  width: 100%;
+  height: 50px;
+  background: transparent;
+}
+.cube {
+width:500px;
+height:50px;
+background: rgba(0, 102, 102, 0.3); 
+color:white;
+/*background:black;*/
+right: calc(100% - 500px);
+transition-property: right;
+transition-duration: 10s;
+-webkit-transition-property: right; /* Safari */
+-webkit-transition-duration: 2s; /* Safari */
+transition-timing-function:ease;
+position:absolute;
+}
+.wrap:hover .cube
+{
+right:30px;
+}
