@@ -1,7 +1,11 @@
+*{
+  margin:0; padding:0; box-sizing:border-box;
+}
 .large-header {
    position: relative;
    margin-left:-10% !important;
-   width: 117.68%;
+   margin-right:-10% !important;
+   /*width: 117.68%;*/
    background: #111;
    overflow: hidden;
    background-size: cover;
@@ -25,6 +29,77 @@
    -webkit-transform: translate3d(-50%, -50%, 0);
    transform: translate3d(-50%, -50%, 0);
 }
+.txt:hover{
+   height: 100px;
+  width: 200px;
+    white space:nowrap;
+background-color:#2b595c;
+  opacity:0.8;
+  color: black !important;
+  font-size: 1em;
+  border-style :inset;
+  border-color: white;
+  border-radius: 10px 5px;
+  position:relative; 
+  transition: all 800ms ease;
+   /*-webkit-animation:bounce 2s infinite;*/
+}
+.txt {
+   white space:nowrap !important;
+   height: 2px;
+   font-size:25px;
+  /*width: 2px;*/
+  background-color:#2b595c;
+  border-radius: 50%;
+}
+.c1 {
+   white space:nowrap;
+   position: absolute;
+   margin: 0;
+   padding: 0;
+   color: #F9F1E9;
+   text-align: center;
+   top: 40%;
+   left: 27%;
+   -webkit-transform: translate3d(-50%, -50%, 0);
+   transform: translate3d(-50%, -50%, 0);
+  
+}
+.c2 {
+   position: absolute;
+   margin: 0;
+   padding: 0;
+   color: #F9F1E9;
+   text-align: center;
+   top: 60%;
+   left: 42%;
+   -webkit-transform: translate3d(-50%, -50%, 0);
+   transform: translate3d(-50%, -50%, 0);
+}
+
+.c3 {
+   position: absolute;
+   margin: 0;
+   padding: 0;
+   color: #F9F1E9;
+   text-align: center;
+   top: 50%;
+   left: 58%;
+   -webkit-transform: translate3d(-50%, -50%, 0);
+   transform: translate3d(-50%, -50%, 0);
+}
+.c4 {
+   position: absolute;
+   margin: 0;
+   padding: 0;
+   color: #F9F1E9;
+   text-align: center;
+   top: 70%;
+   left: 72%;
+   -webkit-transform: translate3d(-50%, -50%, 0);
+   transform: translate3d(-50%, -50%, 0);
+}
+
 
 .demo .main-title {
    text-transform: uppercase;
@@ -41,3 +116,134 @@
       font-size: 3em;
    }
 }
+@import url('https://fonts.googleapis.com/css?family=Fira+Mono:400');
+
+/*body{ 
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  background: #131313;
+  color: #fff;
+  font-size: 96px;
+  font-family: 'Fira Mono', monospace;
+  letter-spacing: -7px;
+}*/
+
+.tt{
+   position: absolute;
+   margin: 0;
+   padding: 0;
+   color: #F9F1E9;
+   text-align: center;
+   top: 10%;
+   left: 27%;
+   font-size: 96px;
+   /*-webkit-transform: translate3d(-50%, -50%, 0);
+   transform: translate3d(-50%, -50%, 0);*/
+/*      display: flex;
+      position:a;
+  width: 100vw;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  background: #131313;
+  color: #fff;
+  
+  font-family: 'Fira Mono', monospace;
+  letter-spacing: -7px;*/
+  animation: glitch 1s linear infinite;
+}
+
+@keyframes glitch{
+  2%,64%{
+    transform: translate(2px,0) skew(0deg);
+  }
+  4%,60%{
+    transform: translate(-2px,0) skew(0deg);
+  }
+  62%{
+    transform: translate(0,0) skew(5deg); 
+  }
+}
+
+.tt:before,
+.tt:after{
+  content: attr(title);
+  position: absolute;
+  left: 0;
+}
+
+.tt:before{
+  animation: glitchTop 1s linear infinite;
+  clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
+}
+
+@keyframes glitchTop{
+  2%,64%{
+    transform: translate(2px,-2px);
+  }
+  4%,60%{
+    transform: translate(-2px,2px);
+  }
+  62%{
+    transform: translate(13px,-1px) skew(-13deg); 
+  }
+}
+
+.tt:after{
+  animation: glitchBotom 1.5s linear infinite;
+  clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
+  -webkit-clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
+}
+
+@keyframes glitchBotom{
+  2%,64%{
+    transform: translate(-2px,0);
+  }
+  4%,60%{
+    transform: translate(-2px,0);
+  }
+  62%{
+    transform: translate(-22px,5px) skew(21deg); 
+  }
+}
+
+
+        /*.c{
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .c{
+            width: 70%;
+            font-size: 30px;
+            display: block;
+            text-align: center;
+        }
+
+        .char{
+            font-size: 40px;
+            height: 40px;
+            animation: an 1s ease-out 1 both;
+            display: inline-block;
+        }
+
+        @keyframes an{
+            from{
+                opacity: 0;
+                transform: perspective(500px) translate3d(-35px, -40px, -150px) rotate3d(1, -1, 0, 35deg);
+            }
+            to{
+                opacity: 1;
+                transform: perspective(500px) translate3d(0, 0, 0);
+            }
+        }
+*/
