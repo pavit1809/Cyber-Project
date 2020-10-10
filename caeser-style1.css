@@ -129,7 +129,7 @@ label          {
   -webkit-transition:0.2s ease all;
 }
 
-input:focus~ label    {
+input:valid~label  {
   top:-20px;
   font-size:14px;
   color:#5264AE;
