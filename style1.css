@@ -3,7 +3,7 @@
 }
 body{
   font-family: "Dosis", Helvetica, Arial, sans-serif;
-  background: url(../2.jpg) no-repeat center center fixed; 
+  background: url(../op1.jpg) no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -19,30 +19,34 @@ body{
 }
 
 .main h3,h6{
-  background: rgba(195, 216, 217, 0.5);
+  /*background: rgba(195, 216, 217, 0.5);*/
 }
 .main1 h3,h6{
-  background: rgba(195, 216, 217, 0.5);
+  /*background: rgba(195, 216, 217, 0.5);*/
 }
 .main{
-  margin-top:10%;
-  margin-bottom:10%;
+  margin-top:5%;
+  margin-bottom:3%;
   margin-left: 13%;
 
 }
 .main1{
-  margin-top:10%;
-  margin-bottom:10%;
+  margin-top:5%;
+  margin-bottom:3%;
   margin-left: 13%;
 
 }
 .container a{
   text-decoration: none;
 }
+.heading{
+  background: rgba(0, 102, 102, 0.3); 
+}
 .main1{
     white space:nowrap;
-background-color:#2b595c;
-  opacity:0.8;
+/*background-color: rgba(0, 102, 102, 0.6);*/
+background: rgba(195, 216, 217, 0.8);
+  /*opacity:0.8;*/
   color: black !important;
   font-size: 1em;
   border-style :inset;
@@ -54,8 +58,9 @@ background-color:#2b595c;
 }
 .main1:hover{
   white space:nowrap;
-  background:url(../pwd.jpg) no-repeat center center fixed;
-  opacity:0.98;
+  /*background:url(../pwd.jpg) no-repeat center center fixed;*/
+  background-color: rgba(0, 102, 102, 0.6);
+  /*opacity:0.98;*/
   color: black;
   font-weight: bold;
   border-color:#2b595c;
@@ -65,8 +70,9 @@ background-color:#2b595c;
 }
 .main{
     white space:nowrap;
-background-color:#2b595c;
-  opacity:0.8;
+/*background-color: rgba(0, 102, 102, 0.6);*/
+background: rgba(195, 216, 217, 0.8);
+  /*opacity:0.8;*/
   color: black !important;
   font-size: 1em;
   border-style :inset;
@@ -78,8 +84,9 @@ background-color:#2b595c;
 }
 .main:hover{
   white space:nowrap;
-  background:url(../cipher.jpg) no-repeat right bottom fixed;
-  opacity:0.98  ;
+  /*background:url(../cipher.jpg) no-repeat right bottom fixed;*/
+  background-color: rgba(0, 102, 102, 0.6 );
+  /*opacity:0.98  ;*/
   color: black;
   font-weight: bold;
   border-color:#2b595c;
@@ -117,4 +124,20 @@ position:absolute;
 .wrap:hover .cube
 {
 right:30px;
+}
+.team{
+  height: 700px;
+  padding: 100px 0px 60px;
+  width: 100%;
+}
+.team h1{
+  font-size: 50px;
+  font-weight: bold;
+}
+.teamsetting{
+  margin-top: 70px;
+}
+
+.fo{
+  height:90vh;
 }
