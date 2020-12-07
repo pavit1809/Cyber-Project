@@ -1,0 +1,428 @@
+<!-- Some global needed elements; -->
+<% var alpha=[4,7,13,10,9,23,0,8,22,18,17,19,21,16,6,12,5,3,25,24,15,1,20,11,14,2]; %>
+<% var nums=[9,4,3,0,7,6,1,8,2,5]; %>
+<% var key2=[37,19,11,3,16,17,62,18,36,1,31,5,15,25,10,54,4,6,40,45,30,41,14,47,9,28,58,43,8,56,34,24,2,7,49,12,20,35,55,26,39,51,0,61,13,46,23,60,50,27,44,42,29,32,48,57,52,22,38,33,53,59,21]; %>
+<% var key4=[60,6,50,5,20,56,27,49,59,47,2,30,18,61,38,26,33,23,25,11,62,42,53,29,58,1,8,7,15,41,16,55,54,17,14,34,21,52,9,48,39,31,57,40,45,32,35,24,12,44,36,46,37,19,43,51,13,22,0,4,3,28,10]; %>
+<% var A3=[5,42,59,61,21,18,44,10,31,35,32,23,30,19,43,22,40,48,47,9,58,26,25,2,24,37,53,13,15,6,12,39,8,3,1,38,52,34,41,57,28,50,4,14,11,46,55,54,20,27,56,62,29,17,7,51,0,60,49,45,16,33,36];%>
+<% var B3=[11,12,4,27,10,61,21,38,34,25,35,29,22,9,0,56,44,39,32,52,23,55,49,54,13,5,3,41,42,2,51,50,40,48,14,33,20,19,15,60,16,26,47,7,31,28,36,43,58,62,6,17,53,46,45,1,30,24,37,8,57,59,18];%>
+<% var alpha3=[4,7,13,10,9,23,0,8,22,18,17,19,21,16,6,12,5,3,25,24,15,1,20,11,14,2];%>
+<% var nums3=[9,4,3,0,7,6,1,8,2,5];%>
+<% function modulo(a,b){ %>
+<%    var answer=(b+(a%b))%b; %>
+<%    return answer; %>
+<% } %>
+<% function modsub(a,b,m){ %>
+<%    return modulo(modulo((modulo(a,m)-modulo(b,m)),m),m); %>
+<% } %>
+<% function getchar(coor){ %>
+<%    if (coor==62){ %>
+<%       var ret='_'; %>
+<%       return ret; %>
+<%    } %>
+<%    if (coor>=0 && coor<=25){ %>
+<%       var ret=String.fromCharCode(65+coor); %>
+<%       return ret; %>
+<%    } %>
+<%    if (coor>=26 && coor<=51){ %>
+<%       var ret=String.fromCharCode(97+(coor-26)); %>
+<%       return ret; %>
+<%    } %>
+<%    if (coor>=52 && coor<=61){ %>
+<%       var ret=String.fromCharCode(48+(coor-52)); %>
+<%       return ret; %>
+<%    } %>
+<%    return '!'; %>
+<% } %>
+<% function position(ch) { %>
+<%    var charcode=ch[0].charCodeAt(0); %>
+<%    // console.log(charcode); %>
+<%    if (ch=='_'){ %>
+<%       return 62; %>
+<%    } %>
+<%    if (charcode>=97){ %>
+<%       var ret=26+(charcode-97); %>
+<%       return ret; %>
+<%    } %>
+<%    if (charcode>=48 && charcode<=57){ %>
+<%       var ret=52+(charcode-48); %>
+<%       return ret; %>
+<%    }  %>
+<%    return (charcode-65); %>
+<% } %>
+<!-- Global ends here -->
+
+<!-- This is the code for 1st cipher -->
+<% var input1=data; %>
+<% var output1=""; %>
+<% for(var i=0;i<=input1.length-1;i++){ %>
+<%    //next line of code for getting ascii value of a character; %>
+<%    var charcode=input1[i].charCodeAt(0); %>
+<%    if (charcode>=65 && charcode<=90) { %>
+<%       var pos=charcode-65; %>
+<%       var newc=String.fromCharCode(65+alpha[pos]); %>
+<%       output1+=newc; %>
+<%    } %>
+<%    if (charcode>=97 && charcode<=122){ %>
+<%       var pos=charcode-97; %>
+<%       var newc=String.fromCharCode(97+alpha[pos]); %>
+<%       output1+=newc; %>
+<%    } %>
+<%    if (charcode>=48 && charcode<=57){ %>
+<%       var pos=charcode-48; %>
+<%       var newc=String.fromCharCode(48+nums[pos]); %>
+<%       output1+=newc; %>
+<%    } %>
+<%    if (input1[i]=='_'){ %>
+<%       output1+='#'; %>
+<%    } %>
+<% } %>
+<!-- Code for first cipher ends here -->
+
+<!-- Code for second cipher starts here -->
+<% var shifter=153; %>
+<% var input2=data; %>
+<% var n2=input2.length; %>
+<% var even="",odd=""; %>
+<% for(var i=0;i<=n2-1;i++){ %>
+<%    if ((i+1)%2==0){ %>
+<%       even+=input2[i]; %>
+<%    } %>
+<%    if ((i+1)%2!=0){ %>
+<%       odd+=input2[i];  %>
+<%    } %>
+<% } %>
+<% var newodd="",neweven=""; %>
+<% for(var i=0;i<=odd.length-1;i++){ %>
+<%    var currpos=position(odd[i]); %>
+<%    var newpos=(currpos+shifter)%63; %>
+<%    var newchar=getchar(key2[newpos]); %>
+<%    newodd+=newchar; %>
+<% } %>
+<% for(var i=0;i<=even.length-1;i++){ %>
+<%    var currpos=position(even[i]); %>
+<%    var newpos=modsub(currpos,shifter,63); %>
+<%    var newchar=getchar(key2[newpos]); %>
+<%    neweven+=newchar; %>
+<% } %>
+<% var output2=""; %>
+<% var ko=0,ke=0; %>
+<% for(var i=0;i<=n2-1;i++){ %>
+<%    if ((i+1)%2==0){ %>
+<%       output2+=neweven[ke]; %>
+<%       ke+=1; %>
+<%    } %>
+<%    if ((i+1)%2!=0){ %>
+<%       output2+=newodd[ko]; %>
+<%       ko+=1; %>
+<%    } %>
+<% } %>
+<!-- Code for second cipher ends here -->
+
+<!-- Code for the third cipher starts here -->
+
+<% function checkc(ch){ %>
+<%    var charcode=ch[0].charCodeAt(0); %>
+<%    return (charcode>=65 && charcode<=90); %>
+<% } %>
+<% function checks(ch){ %>
+<%    var charcode=ch[0].charCodeAt(0); %>
+<%    return (charcode>=97 && charcode<=122); %>
+<% } %>
+<% function checkn(ch){ %>
+<%    var charcode=ch[0].charCodeAt(0); %>
+<%    return (charcode>=48 && charcode<=57); %>
+<% } %>
+<% var key3=[]; %>
+<% for(var i=0;i<=62;i++){ %>
+<%    var subkey3=[]; %>
+<%    for(var j=0;j<=62;j++){ %>
+<%       var subsubkey3=[]; %>
+<%       subsubkey3.push(A3[i]); %>
+<%       subsubkey3.push(B3[j]); %>
+<%       subkey3.push(subsubkey3); %>
+<%    } %>
+<%    key3.push(subkey3); %>
+<% } %>
+<% var input3=data; %>
+<% var n3=input3.length; %>
+<% var output3=""; %>
+<% for(var i=0;i<(n3-(n3%2));i+=2){ %>
+<%    var charcode1=input3[i].charCodeAt(0); %>
+<%    var charcode2=input3[i+1].charCodeAt(0); %>
+<%    if (checkc(input3[i]) && checkc(input3[i+1])){ %>
+<%       var row=charcode1-65; %>
+<%       var col=charcode2-65; %>
+<%       var nrow=key3[row][col][0]; %>
+<%       var ncol=key3[row][col][1]; %>
+<%       output3+=getchar(nrow); %>
+<%       output3+=getchar(ncol); %>
+<%    } %>
+<%    if (checkc(input3[i]) && checks(input3[i+1])){ %>
+<%       var row=charcode1-65; %>
+<%       var col=26+(charcode2-97); %>
+<%       var nrow=key3[row][col][0]; %>
+<%       var ncol=key3[row][col][1]; %>
+<%       output3+=getchar(nrow); %>
+<%       output3+=getchar(ncol); %>
+<%    } %>
+<%    if (checkc(input3[i]) && checkn(input3[i+1])){ %>
+<%       var row=charcode1-65; %>
+<%       var col=52+(charcode2-48); %>
+<%       var nrow=key3[row][col][0]; %>
+<%       var ncol=key3[row][col][1]; %>
+<%       output3+=getchar(nrow); %>
+<%       output3+=getchar(ncol); %>
+<%    } %>
+<%    if (checkc(input3[i]) && (input3[i+1]=='_')){ %>
+<%       var row=charcode1-65; %>
+<%       var col=62; %>
+<%       var nrow=key3[row][col][0]; %>
+<%       var ncol=key3[row][col][1]; %>
+<%       output3+=getchar(nrow); %>
+<%       output3+=getchar(ncol); %>
+<%    } %>
+<%    if (checks(input3[i]) && checks(input3[i+1])){ %>
+<%       var row=26+(charcode1-97); %>
+<%       var col=26+(charcode2-97); %>
+<%       var nrow=key3[row][col][0]; %>
+<%       var ncol=key3[row][col][1]; %>
+<%       output3+=getchar(nrow); %>
+<%       output3+=getchar(ncol); %>
+<%    } %>
+<%    if (checks(input3[i]) && checkc(input3[i+1])){ %>
+<%       var row=26+(charcode1-97); %>
+<%       var col=(charcode2-65); %>
+<%       var nrow=key3[row][col][0]; %>
+<%       var ncol=key3[row][col][1]; %>
+<%       output3+=getchar(nrow); %>
+<%       output3+=getchar(ncol); %>
+<%    } %>
+<%    if (checks(input3[i]) && checkn(input3[i+1])){ %>
+<%       var row=26+(charcode1-97); %>
+<%       var col=52+(charcode2-48); %>
+<%       var nrow=key3[row][col][0]; %>
+<%       var ncol=key3[row][col][1]; %>
+<%       output3+=getchar(nrow); %>
+<%       output3+=getchar(ncol); %>
+<%    } %>
+<%    if (checks(input3[i]) && (input3[i+1]=='_')){ %>
+<%       var row=26+(charcode1-97); %>
+<%       var col=62; %>
+<%       var nrow=key3[row][col][0]; %>
+<%       var ncol=key3[row][col][1]; %>
+<%       output3+=getchar(nrow); %>
+<%       output3+=getchar(ncol); %>
+<%    } %>
+<%    if (checkn(input3[i]) && checkn(input3[i+1])){ %>
+<%       var row=52+(charcode1-48); %>
+<%       var col=52+(charcode2-48); %>
+<%       var nrow=key3[row][col][0]; %>
+<%       var ncol=key3[row][col][1]; %>
+<%       output3+=getchar(nrow); %>
+<%       output3+=getchar(ncol); %>
+<%    } %>
+<%    if (checkn(input3[i]) && checkc(input3[i+1])){ %>
+<%       var row=52+(charcode1-48); %>
+<%       var col=(charcode2-65); %>
+<%       var nrow=key3[row][col][0]; %>
+<%       var ncol=key3[row][col][1]; %>
+<%       output3+=getchar(nrow); %>
+<%       output3+=getchar(ncol); %>
+<%    } %>
+<%    if (checkn(input3[i]) && checks(input3[i+1])){ %>
+<%       var row=52+(charcode1-48); %>
+<%       var col=26+(charcode2-97); %>
+<%       var nrow=key3[row][col][0]; %>
+<%       var ncol=key3[row][col][1]; %>
+<%       output3+=getchar(nrow); %>
+<%       output3+=getchar(ncol); %>
+<%    } %>
+<%    if (checkn(input3[i]) && (input3[i+1]=='_')){ %>
+<%       var row=52+(charcode1-48); %>
+<%       var col=62; %>
+<%       var nrow=key3[row][col][0]; %>
+<%       var ncol=key3[row][col][1]; %>
+<%       output3+=getchar(nrow); %>
+<%       output3+=getchar(ncol); %>
+<%    } %>
+<%    if ((input3[i]=='_') && checkc(input3[i+1])){ %>
+<%       var row=62; %>
+<%       var col=(charcode2-65); %>
+<%       var nrow=key3[row][col][0]; %>
+<%       var ncol=key3[row][col][1]; %>
+<%       output3+=getchar(nrow); %>
+<%       output3+=getchar(ncol); %>
+<%    } %>
+<%    if ((input3[i]=='_') && checks(input3[i+1])){ %>
+<%       var row=62; %>
+<%       var col=26+(charcode2-97); %>
+<%       var nrow=key3[row][col][0]; %>
+<%       var ncol=key3[row][col][1]; %>
+<%       output3+=getchar(nrow); %>
+<%       output3+=getchar(ncol); %>
+<%    } %>
+<%    if ((input3[i]=='_') && checkn(input3[i+1])){ %>
+<%       var row=62; %>
+<%       var col=52+(charcode2-48); %>
+<%       var nrow=key3[row][col][0]; %>
+<%       var ncol=key3[row][col][1]; %>
+<%       output3+=getchar(nrow); %>
+<%       output3+=getchar(ncol); %>
+<%    } %>
+<% } %>
+<% if (n3%2==1){ %>
+<%    var charcode=input3[n3-1].charCodeAt(0); %>
+<%    if (checkc(input3[n3-1])){ %>
+<%       var pos3=charcode-65; %>
+<%       var nch3=String.fromCharCode(65+alpha3[pos3]); %>
+<%       output3+=nch3; %>
+<%    } %>
+<%    if (checks(input3[n3-1])){ %>
+<%       var pos3=charcode-97; %>
+<%       var nch3=String.fromCharCode(97+alpha3[pos3]); %>
+<%       output3+=nch3; %>
+<%    } %>
+<%    if (checkn(input3[n3-1])){ %>
+<%       var pos3=charcode-48; %>
+<%       var nch3=String.fromCharCode(48+nums3[pos3]); %>
+<%       output3+=nch3; %>
+<%    } %>
+<%    if (input3[n3-1]=='_'){ %>
+<%       output3+='#'; %>
+<%    } %>
+<% } %>
+  
+
+<!-- Code for third cipher ends here -->
+
+<!-- Code for the fourth cipher starts here -->
+<% var input4=data; %>
+<% var n4=input4.length; %>
+<% var noofshifts=Math.ceil(Math.sqrt(n4)); %>
+<% var input4final=""; %>
+<% for(var i=noofshifts;i<=n4-1;i++){ %>
+<%    input4final+=input4[i]; %>
+<% } %>
+<% for(var i=0;i<=noofshifts-1;i++){ %>
+<%    input4final+=input4[i]; %>
+<% } %>
+<% var output4=""; %>
+<% for(var i=0;i<=n4-1;i++){ %>
+<%    var currpos4=position(input4final[i]); %>
+<%    currpos4=key4[currpos4]; %>
+<%    output4+=getchar(currpos4); %>
+<% } %>
+
+<!-- Code for the fourth cipher ends here -->
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Cipher Conversion</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/caesar_codes_style.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+</head>
+<body onload="cipher1()">	
+  <div class="wrapper1 text-center">
+  <div class="letters"><span class="letter">C</span><span class="letter">I</span><span class="letter">P</span><span class="letter">H</span><span class="letter">E</span><span class="letter">R</span><span class="letter"> </span><span class="letter">C</span><span class="letter">O</span><span class="letter">N</span><span class="letter">V</span><span class="letter">E</span><span class="letter">R</span><span class="letter">S</span><span class="letter">I</span><span class="letter">O</span><span class="letter">N</span>
+  </div>
+</div>
+</div>
+<div class="text-white center"style="margin-left:25%;margin-top:10%; ">
+    <p id="text">ThE fOlLoWiNg ArE ThE EnCoDeD cIpHeRs. ClIcK On EaCh Of ThEm To ChEcK ThE gEnErAtEd CiPhErS.</p>
+</div>
+<div class="wrapper2 "style="margin-left:25%;margin-top:5%">
+<div class="row">
+  <span>
+    <input class="swing" id="Plain_text" type="text" placeholder="P.T." onfocus="this.value='<%=data%>'" onblur="this.value=''"value="" /><label for="artist">Plain Text</label>
+  </span>
+</div>
+<!-- remember to change ids and values -->
+<div class="row">
+  <span>
+    <input class="swing" id="Substitution Cipher" type="text" placeholder="Cipher #1" 
+    onfocus="this.value='<%=output1%>'" onblur="this.value=''"value="" /><label for="artist">1-D Substitution Cipher</label>
+  </span>
+</div>
+<div class="row">
+  <span>
+    <input class="swing" id="Parity Cipher" type="text" placeholder="P.T." onfocus="this.value='<%=output2%>'" onblur="this.value=''"value="" /><label  for="song">Parity Cipher</label>
+  </span>
+</div>
+<div class="row">
+  <span>
+    <input class="swing" id="2-D cipher" type="text" placeholder="P.T." onfocus="this.value='<%=output3%>'" onblur="this.value=''"value="" /><label  for="eyes">Double Substitution Cipher</label>
+  </span>
+</div>
+<div class="row">
+  <span>
+    <input class="swing" id="Shift Cipher" type="text" placeholder="P.T." onfocus="this.value='<%=output4%>'" onblur="this.value=''"value="" /><label  for="eyes">Shift Cipher</label>
+  </span>
+</div>
+</div>
+<a style="text-decoration: none;" href="/cipherintro">
+  <div class="back">
+    <div class="button_base b07_3d_double_roll">
+      <div>Want to encode other message?!!</div>
+      <div>Want to encode other message?!!</div>
+      <div>Want to encode other message?!!</div>
+      <div>Want to encode other message?!!</div>
+    </div>
+  </div>
+</a>
+<div class="heading footer text-center text-white"><h4>
+To know more,check our repositories and follow us on social media</h4></div>
+<div>
+  <ul> 
+    <li>
+      <a href="#">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span class="fa fa-facebook"></span>
+      </a> 
+    </li>
+    <li>
+      <a href="#">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span class="fa fa-twitter"></span>
+      </a> 
+    </li>
+    <li>
+      <a href="#">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span class="fa fa-instagram"></span>
+      </a> 
+    </li>
+    <li>
+      <a href="#">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span class="fa fa-github"></span>
+      </a> 
+    </li>
+    <li>
+      <a href="#">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span class="fa fa-linkedin"></span>
+      </a> 
+    </li>
+  </ul>  
+</div> 
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html> 

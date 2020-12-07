@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cyber Project</title>
+
+  <link rel="stylesheet" type="text/css" href="/pwd-welcome-style.css">
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+</head>
+<body onload="incNbr()">
+
+<nav id="nav">
+  <button class="nav-icon" id="nav-icon"><span></span></button>
+  <ul>
+    <li><a href="/home">Home</a></li>
+    <li><a href="/add">Add</a></li>
+    <li><a href="/view">View</a></li>
+    <li><a href="/update">Update</a></li>
+    <li><a href="/delete">Delete</a></li>
+  </ul>
+</nav>
+<div class="back-wrapper">
+	<a href="/passwordlanding/loginsignup"><button>  Logout  </button></a> 
+</div>
+
+<div class="main">
+	<span class="an">P</span>
+	<span class="an">A</span>
+	<span class="an">S</span>
+	<span class="an">S</span>
+	<span class="an">W</span>
+	<span class="an letter"></span>
+	<span class="an">R</span>
+	<span class="an">D</span>
+</div>
+
+<div class="txt">
+	<h3>Hi <%=nameofuser%>!...</h3><br><h5>We take care of your passwords so you don't have to worry about remembering them making your work and life easy.<br>Trust us with the security of the strength and integrity of your passwords.</h5>
+</div>
+
+<div id ="postit" class="quote-container">
+  <i class="pin"></i>
+  <blockquote class="note yellow">
+    <h3>The vault says HI!..</h3>
+    <h5>*This is an automated message sticky note.*</h5>
+    <cite class="author">Your Vault 😊</cite>
+  </blockquote>
+</div>
+
+
+<div class="inc-wrapper"><h3>
+Number of passwords stored: 
+<span id="nbr"><%=recordsofuser%></span></h3>
+
+</div>
+
+<div id="resfromserver"><%=tt%></div>
+<script>
+	var mess=document.getElementById("resfromserver");
+	var mess1=mess.innerHTML;
+	if (mess1===""){
+	}
+	else{
+		alert(mess1);
+	}
+</script>
+
+
+<script type="text/javascript">
+	var speed = 275;
+function incEltNbr(id) {
+  elt = document.getElementById(id);
+  endNbr = Number(document.getElementById(id).innerHTML);
+  incNbrRec(0, endNbr, elt);
+}
+function incNbrRec(i, endNbr, elt) {
+  if (i <= endNbr) {
+    elt.innerHTML = i;
+    setTimeout(function() {
+      incNbrRec(i + 1, endNbr, elt);
+    }, speed);
+  }
+}
+function incNbr(){
+  incEltNbr("nbr");
+}
+incEltNbr("nbr");
+</script>
+
+
+
+
+
+<footer class="page-footer font-small ">
+  <div style="background-color: grey;opacity:0.8">
+    <div class="container">
+      <!-- <div class="row py-4 d-flex align-items-center"> -->
+        <div class="text-center mb-4 mb-md-0">
+          <h4 class="mb-0">For any query, feel free to contact us : </h4>
+          <a class="text-white" href="mailto:anuraj.agarwal2019@vitstudent.ac.in" style="text-decoration: none">
+            ‣ <i class="fa fa-google white-text mr-4"> </i>     
+          </a>
+          <a class="text-white" href="mailto:pavitra.goyal2019@vitstudent.ac.in" style="text-decoration: none" >
+           &nbsp&nbsp&nbsp ‣ <i class="fa fa-google white-text mr-4"> </i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script type="text/javascript">
+	
+	var nav = document.getElementById('nav');
+var navlinks = nav.getElementsByTagName('a');
+
+function toggleNav() {
+    (nav.classList.contains('active')) ? nav.classList.remove('active') : nav.classList.add('active');
+  }
+
+document.getElementById('nav-icon').addEventListener('click', function(e) {
+    e.preventDefault();
+    toggleNav();
+});
+
+for(var i = 0; i < navlinks.length; i++) {
+    navlinks[i].addEventListener('click', function() {
+      toggleNav();
+  });
+}
+
+</script>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

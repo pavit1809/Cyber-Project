@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cyber Project</title>
+
+  <link rel="stylesheet" type="text/css" href="/login-style.css">
+  
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+</head>
+<body onload="myFunction2()" >
+	<div id="prcont">
+<div class="wrapper">
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="shadow"></div>
+    <div class="shadow"></div>
+    <div class="shadow"></div>
+    <span>Loading</span>
+</div>
+</div>
+<div class="back-wrapper">
+	<a href="/passwordlanding"><button>Back</button></a> 
+</div>
+<!-- <div class=bod> -->
+<div class="container" id="container">
+	<div class="form-container sign-up-container">
+		<form action="/register" method="POST">
+			<h1>Create Account</h1>
+			<input type="text" name="username" placeholder="Name" required/>
+			<input type="email" name="userid" placeholder="Email" pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" required/>
+			<input id="pass1" type="password" placeholder="Password"  onkeyup="checkPass1();return false" required/>
+			<input id="pass2" type="password" name="userpass" placeholder="Confirm Password" onkeyup="checkPass2(); return false;"required/>
+			<div id=errMsg></div>
+			<button>Sign Up</button>
+		</form>
+	</div>
+	<script type="text/javascript">
+		function checkPass1()
+		{
+		    var pass1 = document.getElementById('pass1');
+		    var message=document.getElementById('errMsg');
+		    var goodColor = "#66cc66";
+		    var badColor = "#ff6666";
+		    if(pass1.value.length > 7)
+		    {
+		        message.style.color = goodColor;
+		        message.innerHTML="";
+		    }
+		    else
+		    {
+		        message.style.color = badColor;
+		        message.innerHTML = " you have to enter at least 8 characters!";
+		        return;
+		    }
+		} 
+		function checkPass2()
+		{
+		    var pass1 = document.getElementById('pass1');
+		    var pass2 = document.getElementById('pass2');
+		    var message=document.getElementById('errMsg');
+		    var goodColor = "#66cc66";
+		    var badColor = "#ff6666";
+		    if(pass1.value == pass2.value){
+		        message.style.color = goodColor;
+		        message.innerHTML="";
+		    }
+		    else{
+		        message.style.color = badColor;
+		      	message.innerHTML=" These passwords don't match";
+		    }
+		} 
+	</script>
+	<div class="form-container sign-in-container">
+		<form action="/validatedata" method="POST">
+			<h1>Log in</h1>
+			<input type="email" name="userid" placeholder="Email" pattern="^([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+$" required/>
+			<input type="password" name="userpass" placeholder="Password" required/>
+			<!-- <a href="#">Forgot your password?</a> -->
+			<button>Log in</button>
+		</form>
+	</div>
+	<div class="overlay-container">
+		<div class="overlay">
+			<div class="overlay-panel overlay-left">
+				<h1>Welcome Back!</h1>
+				<p><b>Already a user?!</b><br>To Connect with us please login with your personal info</p>
+				<button class="ghost" id="signIn">Log In</button>
+				<div class="left-gif"></div>
+			</div>
+			<div class="overlay-panel overlay-right">
+				<h1>Hello, Friend!</h1>
+				<p>Enter your personal details and start your journey with us leaving all the tension of passwords to your <b>OWN PERSONAL VAULT</b>.</p>
+				<button class="ghost" id="signUp">Sign Up</button>
+				<div class="right-gif"></div>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="resfromserver"><%=tt%></div>
+<script>
+	var mess=document.getElementById("resfromserver");
+	var mess1=mess.innerHTML;
+	if (mess1===""){
+	}
+	else{
+		alert(mess1);
+	}
+</script>
+<!-- </div> -->
+<script >
+    function myFunction2(){
+    setTimeout(myFunction,1200);
+  }
+    var preloader=document.getElementById('prcont');
+    const b = document.getElementById('container');
+    function myFunction(){
+      preloader.style.display='none';
+      b.style.display='flex';
+    }
+</script>
+<script>
+	const signUpButton = document.getElementById('signUp');
+const signInButton = document.getElementById('signIn');
+const container = document.getElementById('container');
+
+signUpButton.addEventListener('click', () => {
+	container.classList.add("right-panel-active");
+});
+
+signInButton.addEventListener('click', () => {
+	container.classList.remove("right-panel-active");
+});
+
+</script>
+
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
